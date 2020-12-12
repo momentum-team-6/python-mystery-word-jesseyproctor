@@ -3,17 +3,17 @@ opened_file = open("words.txt", "r")
 read_file = opened_file.read().upper()
 # print(type(read_file))
 word_list = read_file.split()
-# print(type(word_list))
+# print(word_list)
 
-#create easy, normal and hard word_lists:
-#seperate all returned words in word_list in to three catogories based on length
+# create easy, normal and hard word_lists:
+# seperate all returned words in word_list in to three catogories based on length
 def create_easy_word_list(list):
     new_list = []
     for word in list:
         if len(word) >= 4 and len(word) <= 5:
             new_list.append(word)
         # print(new_list)
-        return(new_list)
+    return(new_list)
 
 def create_normal_word_list(list):
     new_list = []
@@ -21,7 +21,7 @@ def create_normal_word_list(list):
         if len(word) >= 6 and len(word) <= 8:
             new_list.append(word)
         # print(new_list)
-        return(new_list)
+    return(new_list)
 
 def create_hard_word_list(list):
     new_list = []
@@ -29,9 +29,10 @@ def create_hard_word_list(list):
         if len(word) > 8:
             new_list.append(word)
         # print(new_list)
-        return(new_list)
+    return(new_list)
 
 easy_list = create_easy_word_list(word_list)
+# print(easy_list) #this is where the code is broken
 normal_list = create_normal_word_list(word_list)
 hard_list = create_hard_word_list(word_list)
 
