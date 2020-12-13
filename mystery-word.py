@@ -64,7 +64,7 @@ else:
 #also, I was orginignally trying to combine if statements and while loop because I thought the the level variable I defined 
 #in loop would dissapear after loop was used.  Why does this work?
 
-# print(returned_word)
+print(returned_word)
 
 #Set varaibles for game:
 allowed_guesses = 8
@@ -76,13 +76,21 @@ print(f'Guess your word one letter at a time.  Your word contains {len(returned_
 
 while game_over == False:
     guess = input("Enter a letter here: ").upper()
-    print(guess)
+    # print(guess)
     # used_guesses +=1 #if guessed correctly this doesnt count as a guess
     for index in range(len(returned_word)):
         if guess != returned_word[index]:
             used_guesses +=1
+            print(used_guesses)
+            print(f'{guess} is not a letter in your word. ')
         elif guess == returned_word[index]:
+            word_display[index] = guess
             print(f'Good job! The letter "{guess}" appears in your word.')
+            word_display = word_display[index].append(guess)
+            print(word_display[index])
+        else:
+            print('hi')
+    
 #     game_over = True
 #     else:
 #         print("Your guess was incorrect. You have", allowed_guesses - used_guesses, "remaining guesses")
