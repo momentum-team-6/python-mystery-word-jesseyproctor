@@ -69,6 +69,7 @@ print(returned_word)
 allowed_guesses = 8
 used_guesses = 0
 game_over = False
+#list comprehension (values)=[(expression) for (item) in (items)]:
 word_display = ['_' for letter in range(len(returned_word))]
 positions = []
 
@@ -78,31 +79,22 @@ while game_over == False:
     guess = input("Enter a letter here: ").upper()
     # used_guesses +=1 #if guessed correctly this doesnt count as a guess
     for index in range(len(returned_word)):
-            if guess == returned_word[index]:
-                positions.append(index)
-    for position in positions:
-        guess = word_display[position] 
-    print(f'Good job! The letter "{guess}" appears in your word.')
+        if guess == returned_word[index]:
+            positions.append(index)
+            print(f'Good job! The letter "{guess}" appears in your word.')
+            for position in positions:
+                word_display[position] = guess 
+                print(word_display)
+        else:
+            used_guesses +=1
+            print(f'{guess} is not a letter in your word. You have {allowed_guesses - used_guesses} remaining guesses')
+            if used_guesses == allowed_guesses:
+                print("Game Over")
+                game_over = True
+    
     print(word_display)
     
-
-        # if guess != returned_word[index]:
-        #     used_guesses +=1
-        #     print(used_guesses)
-        #     print(f'{guess} is not a letter in your word. ')
-        # elif guess == returned_word[index]:
-        #     word_display[index] = guess
-        #     print(f'Good job! The letter "{guess}" appears in your word.')
-        #     word_display = word_display[index].append(guess)
-        #     print(word_display[index])
-        # else:
-        #     print('hi')
     
-#     game_over = True
-#     else:
-#         print("Your guess was incorrect. You have", allowed_guesses - used_guesses, "remaining guesses")
-#             if used_guesses == allowed_guesses:
-#                 print("Game Over")
-#                 game_over = True
+
 
 
