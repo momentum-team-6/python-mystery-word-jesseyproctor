@@ -71,6 +71,7 @@ used_guesses = 0
 game_over = False
 #list comprehension (values)=[(expression) for (item) in (items)]:
 word_display = ['_' for letter in range(len(returned_word))]
+returned_word_list = list(returned_word)
 positions = []
 
 print(f'Guess your word one letter at a time.  Your word contains {len(returned_word)} letters.  You have 8 guesses.')
@@ -81,16 +82,20 @@ while game_over == False:
     for index in range(len(returned_word)):
         if guess == returned_word[index]:
             positions.append(index)
-            print(f'Good job! The letter "{guess}" appears in your word.')
+            print(f'Good job! The letter "{guess}" appears in the word.')
             for position in positions:
                 word_display[position] = guess 
             print(word_display)
+    if word_display == returned_word_list:
+        game_over == True
+        print('{returned_word} is the word.  You win!')
     if guess != returned_word[index]:
         used_guesses +=1
-        print(f'{guess} is not a letter in your word. You have {allowed_guesses - used_guesses} remaining guesses')
+        print(f'{guess} is not a letter in the word. You have {allowed_guesses - used_guesses} remaining guesses')
         if used_guesses == allowed_guesses:
             game_over = True
-            print("Game Over")
+            print(f'You are out of guesses.  The word was {returned_word}.  Better luck next time!')
+            
                 
     
 
