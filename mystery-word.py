@@ -1,3 +1,7 @@
+import random
+
+#wrap entire thing in game play functiom to start it over when game__over equals true (call game play function in while loop when game_over == true)
+
 #Prepare data from text file to be used in game:
 opened_file = open("words.txt", "r")
 read_file = opened_file.read().upper()
@@ -36,7 +40,6 @@ normal_list = create_normal_word_list(word_list)
 hard_list = create_hard_word_list(word_list)
 
 #Player chooses difficulty level and computer selects word:
-import random
  
 def get_word(level):
     word_dict = {
@@ -53,8 +56,6 @@ while True:
         continue
     else:
         break
-
-
 
 # if level == 'easy':
 #     easy_word = random.choice(easy_list)
