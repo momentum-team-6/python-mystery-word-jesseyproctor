@@ -73,26 +73,27 @@ game_over = False
 word_display = ['_' for letter in range(len(returned_word))]
 positions = []
 
-print(f'Guess your word one letter at a time.  Your word contains {len(returned_word)} characters.  You have 8 guesses.')
+print(f'Guess your word one letter at a time.  Your word contains {len(returned_word)} letters.  You have 8 guesses.')
 
+#Game Play:
 while game_over == False:
     guess = input("Enter a letter here: ").upper()
-    # used_guesses +=1 #if guessed correctly this doesnt count as a guess
     for index in range(len(returned_word)):
         if guess == returned_word[index]:
             positions.append(index)
             print(f'Good job! The letter "{guess}" appears in your word.')
             for position in positions:
                 word_display[position] = guess 
-                print(word_display)
-        else:
-            used_guesses +=1
-            print(f'{guess} is not a letter in your word. You have {allowed_guesses - used_guesses} remaining guesses')
-            if used_guesses == allowed_guesses:
-                print("Game Over")
-                game_over = True
+            print(word_display)
+    if guess != returned_word[index]:
+        used_guesses +=1
+        print(f'{guess} is not a letter in your word. You have {allowed_guesses - used_guesses} remaining guesses')
+        if used_guesses == allowed_guesses:
+            game_over = True
+            print("Game Over")
+                
     
-    print(word_display)
+
     
     
 
