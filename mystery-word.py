@@ -38,32 +38,42 @@ hard_list = create_hard_word_list(word_list)
 #Player chooses difficulty level and computer selects word:
 import random
  
+def get_word(level):
+    word_dict = {
+        "easy":random.choice(easy_list),
+        "normal":random.choice(normal_list),
+        "hard":random.choice(hard_list)
+    }
+    return word_dict[level]
+    
 while True:
-    level = input('Please select game mode. Enter "easy", "normal", or "hard": ')
-    if level != "easy" and level != "Easy" and level != "normal" and level != "Normal" and level != "hard" and level != "Hard": 
+    level = input('Please select game mode. Enter "easy", "normal", or "hard": ').lower()
+    if level != "easy" and level != "normal" and level != "hard": 
         print(f'Error, "{level}" is not a game mode.')
         continue
     else:
         break
 
-if level == 'easy' or level == 'Easy':
-    easy_word = random.choice(easy_list)
-    # print(easy_word)
-    returned_word = easy_word
-elif level == 'normal' or level == 'Normal':
-    normal_word = random.choice(normal_list)
-    # print(normal_word)
-    returned_word = normal_word
-elif level == 'hard' or level == 'Hard':
-    hard_word = random.choice(hard_list)
-    # print(hard_word)
-    returned_word = hard_word
-else:
-    print(f'Error, "{level}" is not a game mode.')
-#This else statement is unnecesary except to close out loop.  How do I get rid of it or what do I put in it's place?
-#also, I was orginignally trying to combine if statements and while loop because I thought the the level variable I defined 
-#in loop would dissapear after loop was used.  Why does this work?
-print(returned_word)
+
+
+# if level == 'easy':
+#     easy_word = random.choice(easy_list)
+#     # print(easy_word)
+#     returned_word = easy_word
+# elif level == 'normal':
+#     normal_word = random.choice(normal_list)
+#     # print(normal_word)
+#     returned_word = normal_word
+# elif level == 'hard':
+#     hard_word = random.choice(hard_list)
+#     # print(hard_word)
+#     returned_word = hard_word
+# else:
+#     print(f'Error, "{level}" is not a game mode.')
+returned_word = get_word(level) 
+print(returned_word)  
+
+# print(returned_word)
 
 #Set varaibles for game:
 allowed_guesses = 8
@@ -72,29 +82,39 @@ game_over = False
 #list comprehension (values)=[(expression) for (item) in (items)]:
 word_display = ['_' for letter in range(len(returned_word))]
 returned_word_list = list(returned_word)
-positions = []
 
 print(f'Guess your word one letter at a time.  Your word contains {len(returned_word)} letters.  You have 8 guesses.')
 
 #Game Play:
 while game_over == False:
     guess = input("Enter a letter here: ").upper()
+    # store each index that the guess occurs at
+    # resets with each guess (b/c while loop):
+    guess_indices = []
+
     for index in range(len(returned_word)):
         if guess == returned_word[index]:
-            positions.append(index)
-            print(f'Good job! The letter "{guess}" appears in the word.')
-            for position in positions:
-                word_display[position] = guess 
-            print(word_display)
-    if word_display == returned_word_list:
-        game_over == True
-        print('{returned_word} is the word.  You win!')
-    if guess != returned_word[index]:
+            guess_indices.append(index)
+            
+    if len(guess_indices) > 0:
+        print(f'Good job! The letter "{guess}" appears in the word.')
+        # Replace index in word display with guess:
+        for i in guess_indices:
+            word_display[i] = guess
+        print(word_display)
+        if word_display == returned_word_list:
+            game_over == True
+            print(f'{returned_word} is the word.  You win!')
+
+    else:
         used_guesses +=1
         print(f'{guess} is not a letter in the word. You have {allowed_guesses - used_guesses} remaining guesses')
         if used_guesses == allowed_guesses:
             game_over = True
             print(f'You are out of guesses.  The word was {returned_word}.  Better luck next time!')
+    
+   
+
             
                 
     
